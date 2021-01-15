@@ -63,6 +63,8 @@ class Game(object):
         if word.lower() in dictionary:
             self.check_if_drawed_letters_used(word)
         else:
+            self.total_points -= 10
+            print(f"Your total number of points is {self.total_points}")
             print("You typed the word which doesn't exist in the dictionary :((")
             print('Please try again.')
 
