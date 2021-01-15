@@ -19,7 +19,7 @@ class Game(object):
 
     def start(self):
         print(f'Hello {self.name}!! Let\'s start the game!')
-        print("Remember! Over the whole game you can replace 2 letters! :)")
+        print("Remember! Over the whole game you can replace 3 letters! :)")
         print("If you want to replace letter, for example 'h' type '#h'")
         print("Good luck!")
 
