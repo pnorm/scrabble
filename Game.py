@@ -43,21 +43,23 @@ class Game(object):
         Returns:
             probabilities (list)
         '''
-        probabilities = []
+        p = []
         for letter in self.alphabet:
             if letter == 'A' or letter == 'E' or letter == 'I' or letter == 'O' or letter == 'U':
-                probabilities.append(2)
+                p.append(3)
+            elif letter == 'Q' or letter == 'V' or letter == 'X':
+                p.append(1)
             else:
-                probabilities.append(1)
-        normalized_probabilities = self.normalization(probabilities)
-        return normalized_probabilities
+                p.append(2)
+        probabilities = self.normalization(p)
+        return probabilities
             
 
-    def normalization(self, probabilities):
+    def normalization(self, p):
         '''
         Normalize our list that the elements will sum up to 1.
         '''
-        return [i/sum(probabilities) for i in probabilities]
+        return [i/sum(p) for i in p]
         
 
     def draw_letters(self):
