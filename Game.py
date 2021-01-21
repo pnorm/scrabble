@@ -1,4 +1,4 @@
-from random import randint
+import numpy as np
 
 
 class Game(object):
@@ -35,16 +35,38 @@ class Game(object):
         with open(file=filename, mode='r', encoding='UTF-8') as f:
             dictionary = f.read().splitlines()
         return dictionary
+
+
+    def generate_probabilities(self):
+        '''
+        Generates probability distribution for drawing letters
+        Returns:
+            probabilities (list)
+        '''
+        probabilities = []
+        for letter in self.alphabet:
+            if letter == 'A' or letter == 'E' or letter == 'I' or letter == 'O' or letter == 'U':
+                probabilities.append(2)
+            else:
+                probabilities.append(1)
+        normalized_probabilities = self.normalization(probabilities)
+        return normalized_probabilities
+            
+
+    def normalization(self, probabilities):
+        '''
+        Normalize our list that the elements will sum up to 1.
+        '''
+        return [i/sum(probabilities) for i in probabilities]
         
 
     def draw_letters(self):
         '''
         Draws n letters from alphabet
         '''
-        temp_alphabet = self.alphabet
         while self.n_drawed_letters < 7:
-            random_number = randint(0, len(temp_alphabet)-1)
-            random_letter = temp_alphabet[random_number]
+            probabilities = self.generate_probabilities()
+            random_letter = np.random.choice(np.array(self.alphabet), p=probabilities)
             self.your_drawed_letters.append(random_letter)
             self.n_drawed_letters += 1
 
